@@ -3,12 +3,14 @@ const { data: parts, error } = await useFetch("/api/parts");
 
 const search = ref("");
 const selectedBrands = ref<string[]>([]);
+const selectedCondition = ref<Part["condition"] | "all">("all");
 
 const filteredParts = computed(() => {
   if (!parts.value) return [];
   return filterParts(parts.value, {
     search: search.value,
     brands: selectedBrands.value,
+    condition: selectedCondition.value,
   });
 });
 
@@ -52,6 +54,24 @@ const brands = computed(() => {
         </label>
       </div>
     </fieldset>
+    <div class="mb-6">
+      <label
+        for="condition"
+        class="mb-2 block text-sm font-medium text-gray-700"
+      >
+        Condition
+      </label>
+      <select
+        id="condition"
+        v-model="selectedCondition"
+        class="rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm"
+      >
+        <option value="all">All conditions</option>
+        <option value="new">New</option>
+        <option value="used">Used</option>
+        <option value="refurbished">Refurbished</option>
+      </select>
+    </div>
     <p v-if="error" class="rounded-lg bg-red-50 p-4 text-danger">
       Something went wrong while loading the parts. Please try again later.
     </p>
