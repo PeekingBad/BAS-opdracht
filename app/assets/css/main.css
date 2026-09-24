@@ -3,8 +3,9 @@
 @theme {
   --color-primary: #161b45;
   --color-primary-light: #e5eef8;
+  --color-info: #0298DF;
   --color-secondary: #0066cc;
   --color-accent: #1da15e;
-  --color-danger: #d13535;
+  --color-danger: #D52525;
   --color-rating: #ecbd28;
 }
