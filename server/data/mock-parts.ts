@@ -8,7 +8,7 @@ export const parts: Part[] = [
       "price": 795,
       "inStock": true,
       "category": "Body",
-      "image": "/img/placeholder-part.png"
+      "image": "/img/daf_sideskirt.webp"
     },
     {
       "id": "1948743",
@@ -19,7 +19,7 @@ export const parts: Part[] = [
       "price": 412,
       "inStock": true,
       "category": "Lighting",
-      "image": "/img/placeholder-part.png"
+      "image": "/img/daf_headlight_left.webp"
     },
     {
       "id": "2006354",
@@ -30,6 +30,29 @@ export const parts: Part[] = [
       "price": 1150,
       "inStock": false,
       "category": "Chassis",
-      "image": "/img/placeholder-part.png"
+      "image": "/img/daf_fuel_tank.webp"
     },
+    {
+      "id": "2006355",
+      "name": "Volvo VN 640 4x2, 4x4 Wheel hub assembly",
+      "oem": "2006355",
+      "brand": "Volvo",
+      "condition": "new",
+      "price": 1150,
+      "inStock": true,
+      "category": "Wheels",
+      "image": "/img/volvo_wheel_hub.webp"
+    },
+
+    {
+      "id": "2006356",
+      "name": "MAN TGX 41.600 Wheel hub assembly",
+      "oem": "2006356",
+      "brand": "MAN",
+      "condition": "used",
+      "price": 2000,
+      "inStock": true,
+      "category": "Wheels",
+      "image": "/img/man_wheel_hub.webp"
+    }
   ]
