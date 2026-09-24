@@ -4,7 +4,6 @@
 
 <template>
 <main>
-  <h1>Welcome to the Parts Store</h1>
   <ul class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
     <li v-for="part in parts" :key="part.id">
       <PartCard :part="part" />

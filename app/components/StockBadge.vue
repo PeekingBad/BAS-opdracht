@@ -6,12 +6,11 @@ defineProps<{
 
 <template>
   <span
-    class="inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-medium"
-    :class="inStock ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'"
+    class="inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-sm font-medium"
   >
     <span
-      class="size-1.5 rounded-full"
-      :class="inStock ? 'bg-green-600' : 'bg-red-600'"
+      class="size-2 rounded-full"
+      :class="inStock ? 'bg-accent' : 'bg-danger'"
       aria-hidden="true"
     />
     {{ inStock ? 'In stock' : 'Out of stock' }}
