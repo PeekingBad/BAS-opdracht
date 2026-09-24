@@ -1,17 +1,20 @@
 <script setup lang="ts">
+import type { SortOption } from "~/utils/sortParts";
 const { data: parts, error } = await useFetch("/api/parts");
-
 const search = ref("");
 const selectedBrands = ref<string[]>([]);
 const selectedCondition = ref<Part["condition"] | "all">("all");
+const sort = ref<SortOption>("default");
 
 const filteredParts = computed(() => {
   if (!parts.value) return [];
-  return filterParts(parts.value, {
+
+  const filtered = filterParts(parts.value, {
     search: search.value,
     brands: selectedBrands.value,
     condition: selectedCondition.value,
   });
+  return sortParts(filtered, sort.value);
 });
 
 const brands = computed(() => {
@@ -45,6 +48,19 @@ const brands = computed(() => {
             {{ filteredParts.length }}
             {{ filteredParts.length === 1 ? "part" : "parts" }}
           </p>
+
+          <div class="ml-auto flex items-center gap-2">
+            <label for="sort" class="text-sm text-gray-600">Sort by</label>
+            <select
+              id="sort"
+              v-model="sort"
+              class="rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm"
+            >
+              <option value="default">Default</option>
+              <option value="price-asc">Price: low to high</option>
+              <option value="price-desc">Price: high to low</option>
+            </select>
+          </div>
         </div>
 
         <p v-if="error" class="rounded-lg bg-red-50 p-4 text-danger">
