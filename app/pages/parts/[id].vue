@@ -21,6 +21,7 @@ useSeoMeta({
       to="/"
       class="mb-4 inline-block text-sm text-info hover:underline"
     >
+    <Icon name="lucide:chevron-left" aria-hidden="true" />
       Back to all parts
     </NuxtLink>
 
@@ -46,6 +47,7 @@ useSeoMeta({
             type="button"
             class="mt-6 w-full rounded-lg bg-accent px-4 py-3 font-semibold text-white hover:opacity-90"
           >
+            <Icon name="lucide:shopping-cart-plus" aria-hidden="true"/>
             Add to quote
           </button>
         </div>
