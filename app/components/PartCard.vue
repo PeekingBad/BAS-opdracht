@@ -22,10 +22,11 @@ defineProps<{
         <StockBadge :in-stock="part.inStock" />
       </div>
       <h2 class="font-semibold text-gray-900">
-        <NuxtLink 
-        :to="`/parts/${part.id}`"
-        class="after:absolute after:inset-0 hover:underline"
-        >{{ part.name }}</NuxtLink>
+        <NuxtLink
+          :to="`/parts/${part.id}`"
+          class="after:absolute after:inset-0 hover:underline"
+          >{{ part.name }}</NuxtLink
+        >
       </h2>
       <p class="text-sm text-gray-600">OEM: {{ part.oem }}</p>
       <p class="text-sm capitalize text-gray-600">{{ part.condition }}</p>

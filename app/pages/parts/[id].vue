@@ -1,6 +1,14 @@
 <script setup lang="ts">
 const route = useRoute();
-const { data: part } = await useFetch(`/api/parts/${route.params.id}`);
+const { data: part, error } = await useFetch(`/api/parts/${route.params.id}`);
+
+if (error.value) {
+  throw createError({
+    status: 404,
+    statusText: 'Part not found',
+    fatal: true,
+  })
+}
 </script>
 
 <template>
