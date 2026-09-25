@@ -5,14 +5,16 @@ const { data: part, error } = await useFetch(`/api/parts/${route.params.id}`);
 if (error.value) {
   throw createError({
     status: 404,
-    statusText: 'Part not found',
+    statusText: "Part not found",
     fatal: true,
-  })
+  });
 }
 
 useSeoMeta({
   title: () => part.value?.name,
-})
+});
+
+const quote = useQuoteStore();
 </script>
 
 <template>
@@ -21,7 +23,7 @@ useSeoMeta({
       to="/"
       class="mb-4 inline-block text-sm text-info hover:underline"
     >
-    <Icon name="lucide:chevron-left" aria-hidden="true" />
+      <Icon name="lucide:chevron-left" aria-hidden="true" />
       Back to all parts
     </NuxtLink>
 
@@ -45,10 +47,11 @@ useSeoMeta({
           </div>
           <button
             type="button"
-            class="mt-6 w-full rounded-lg bg-accent px-4 py-3 font-semibold text-white hover:opacity-90"
+            class="mt-6 w-full rounded-lg bg-accent px-4 py-3 font-semibold text-white hover:opacity-90 disabled:cursor-not-allowed disabled:bg-gray-300"
+            :disabled="quote.has(part.id)"
+            @click="quote.add(part)"
           >
-            <Icon name="lucide:shopping-cart-plus" aria-hidden="true"/>
-            Add to quote
+            {{ quote.has(part.id) ? "Added to quote" : "Add to quote" }}
           </button>
         </div>
 
@@ -77,4 +80,3 @@ useSeoMeta({
     </div>
   </div>
 </template>
-
