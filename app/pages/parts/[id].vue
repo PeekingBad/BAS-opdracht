@@ -14,7 +14,23 @@ useSeoMeta({
   title: () => part.value?.name,
 });
 
-const quote = useQuoteStore();
+const justAdded = ref(false);
+let resetTimer: ReturnType<typeof setTimeout> | undefined;
+
+function addToQuote() {
+  if (!part.value) return;
+
+  quote.add(part.value);
+  justAdded.value = true;
+
+  clearTimeout(resetTimer);
+  resetTimer = setTimeout(() => {
+    justAdded.value = false;
+  }, 1500);
+}
+
+onBeforeUnmount(() => clearTimeout(resetTimer));
+const quote = useQuoteStore()
 </script>
 
 <template>
@@ -47,11 +63,15 @@ const quote = useQuoteStore();
           </div>
           <button
             type="button"
-            class="mt-6 w-full rounded-lg bg-accent px-4 py-3 font-semibold text-white hover:opacity-90 disabled:cursor-not-allowed disabled:bg-gray-300"
-            :disabled="quote.has(part.id)"
-            @click="quote.add(part)"
+            class="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-accent px-4 py-3 font-semibold text-white hover:opacity-90"
+            @click="addToQuote"
           >
-            {{ quote.has(part.id) ? "Added to quote" : "Add to quote" }}
+            <Icon
+              :name="justAdded ? 'lucide:check' : 'lucide:shopping-cart-plus'"
+              class="size-5"
+              aria-hidden="true"
+            />
+            {{ justAdded ? "Added to quote" : "Add to quote" }}
           </button>
         </div>
 
