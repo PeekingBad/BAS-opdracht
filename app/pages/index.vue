@@ -21,6 +21,12 @@ const brands = computed(() => {
   if (!parts.value) return [];
   return [...new Set(parts.value.map((part) => part.brand))].sort();
 });
+
+function clearFilters() {
+  search.value = "";
+  selectedBrands.value = [];
+  selectedCondition.value = "all";
+}
 </script>
 <template>
   <div>
@@ -66,7 +72,22 @@ const brands = computed(() => {
         <p v-if="error" class="rounded-lg bg-red-50 p-4 text-danger">
           Something went wrong while loading the parts. Please try again later.
         </p>
-
+        <div
+          v-else-if="filteredParts.length === 0"
+          class="rounded-lg border border-dashed border-gray-300 bg-white p-8 text-center"
+        >
+          <p class="font-medium text-gray-900">No parts found</p>
+          <p class="mt-1 text-sm text-gray-600">
+            Try a different search term or adjust your filters.
+          </p>
+          <button
+            type="button"
+            class="mt-4 text-sm font-medium text-secondary hover:underline hover:cursor-pointer"
+            @click="clearFilters"
+          >
+            Clear all filters
+          </button>
+        </div>
         <ul v-else class="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
           <li v-for="part in filteredParts" :key="part.id">
             <PartCard :part="part" />
